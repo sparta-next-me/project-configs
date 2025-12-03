@@ -1,55 +1,38 @@
 spring:
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
 
-      routes:
-        - id: hub-service
-          uri: lb://hub-service
-          predicates:
-            - Path=/v1/hub/**
-          filters:
-            - "RewritePath=/v1/hub(?:/(?<path>.*))?, /\\${path}"
+          routes:
+            - id: hub-service
+              uri: lb://hub-service
+              predicates:
+                - Path=/v1/hub/**
+              filters:
+                - RewritePath=/v1/hub(?:/(?<path>.*))?, /${path}
 
-        - id: product-service
-          uri: lb://product-service
-          predicates:
-            - Path=/v1/product/**
-          filters:
-            - "RewritePath=/v1/product(?:/(?<path>.*))?, /\\${path}"
+            - id: product-service
+              uri: lb://product-service
+              predicates:
+                - Path=/v1/product/**
+              filters:
+                - RewritePath=/v1/product(?:/(?<path>.*))?, /${path}
 
-        - id: user-service
-          uri: lb://user-service
-          predicates:
-            - Path=/v1/user/**
-          filters:
-            - "RewritePath=/v1/user(?:/(?<path>.*))?, /\\${path}"
+            - id: user-service
+              uri: lb://user-service
+              predicates:
+                - Path=/v1/user/**
+              filters:
+                - RewritePath=/v1/user(?:/(?<path>.*))?, /${path}
 
-        - id: order-service
-          uri: lb://order-service
-          predicates:
-            - Path=/v1/order/**
-          filters:
-            - "RewritePath=/v1/order(?:/(?<path>.*))?, /\\${path}"
-
-springdoc:
-  enable-native-support: true
-  api-docs:
-    enabled: true
-  swagger-ui:
-    enabled: true
-    path: /api-docs.html
-    operations-sorter: alpha
-    tags-sorter: alpha
-    doc-expansion: full
-    config-url: /v3/api-docs/swagger-config
-    urls:
-      - url: /user-service/v3/api-docs
-        name: USER API
-      - url: /hub-service/v3/api-docs
-        name: HUB API
-      - url: /order-service/v3/api-docs
-        name: ORDER API
+            - id: order-service
+              uri: lb://order-service
+              predicates:
+                - Path=/v1/order/**
+              filters:
+                - RewritePath=/v1/order(?:/(?<path>.*))?, /${path}
