@@ -120,3 +120,8 @@
 #
 #slack:
 #  token: ${SLACK_USER_TOKEN}
+
+jwt:
+  secret: "my-nextme-jwt-secret-key-very-long-1234567890"
+  access-token-validity-seconds: 1800
+  refresh-token-validity-seconds: 1209600
