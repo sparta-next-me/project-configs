@@ -14,10 +14,10 @@ spring:
               predicates:
                 - Path=/v1/user/**
                 
-            - id: promtion-service
-              uri: lb://promtion-service
+            - id: promotion-service
+              uri: lb://promotion-service
               predicates:
-                - Path=/v1/promtions/**
+                - Path=/v1/promotions/**
 
             - id: point-service
               uri: lb://point-service
