@@ -9,28 +9,14 @@ spring:
               lower-case-service-id: true
 
           routes:
-            - id: hub-service
-              uri: lb://hub-service
-              predicates:
-                - Path=/v1/hub/**
-              filters:
-                - RewritePath=/v1/hub(?:/(?<path>.*))?, /${path}
-
-            - id: product-service
-              uri: lb://product-service
-              predicates:
-                - Path=/v1/product/**
-              filters:
-                - RewritePath=/v1/product(?:/(?<path>.*))?, /${path}
-
             - id: user-service
               uri: lb://user-service
               predicates:
                 - Path=/v1/user/**
                 
-            - id: order-service
-              uri: lb://order-service
+            - id: promtion-service
+              uri: lb://promtion-service
               predicates:
-                - Path=/v1/order/**
+                - Path=/v1/promtions/**
               filters:
-                - RewritePath=/v1/order(?:/(?<path>.*))?, /${path}
+                - RewritePath=/v1/promtions(?:/(?<path>.*))?, /${path}
