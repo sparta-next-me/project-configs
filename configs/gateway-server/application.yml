@@ -20,3 +20,17 @@ spring:
                 - Path=/v1/promtions/**
               filters:
                 - RewritePath=/v1/promtions(?:/(?<path>.*))?, /${path}
+
+            - id: point-service
+              uri: lb://point-service
+              predicates:
+                - Path=/v1/points/**
+              filters:
+                - RewritePath=/v1/promotions(?:/(?<path>.*))?, /${path}
+
+            - id: notification-service
+              uri: lb://notification-service
+              predicates:
+                - Path=/v1/notifications/**
+              filters:
+                - RewritePath=/v1/notifications(?:/(?<path>.*))?, /${path}
