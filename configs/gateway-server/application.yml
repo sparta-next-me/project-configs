@@ -68,15 +68,13 @@ spring:
             - id: chat-service
               uri: lb://chat-service
               predicates:
-                #- Path=/v1/chats/**,/chat-service/ws/chat/**
-                - Path=/ws/chat/info,/ws/chat/[0-9]*/**,/chat-service/ws/chat/info,/chat-service/ws/chat/[0-9]*/**
+                - Path=/v1/chats/**,/chat-service/ws/chat/**        
                 
             - id: chat-websocket
               #uri: ws://sparta-nextme.xyz:18080  # ws:// 프로토콜 사용
               uri: lb:ws://chat-service  # ws:// 프로토콜 사용
               predicates:
-                #- Path=/ws/chat/** #SockJS 요청 고려
-                - Path=/chat-service/ws/chat/**,/ws/chat/**
+                - Path=/ws/chat/** #SockJS 요청 고려
                 
 # 디버깅용 로그 (문제 해결 후 제거 가능)
 logging:
