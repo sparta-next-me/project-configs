@@ -72,7 +72,7 @@ spring:
               #uri: ws://sparta-nextme.xyz:18080  # ws:// 프로토콜 사용
               uri: lb:ws://chat-service  # ws:// 프로토콜 사용
               predicates:
-                - Path=/chat-service/ws/chat/**
+                - Path=/chat-service/ws/chat/**,/ws/chat/** #SockJS 요청 고려
                 
 # 디버깅용 로그 (문제 해결 후 제거 가능)
 logging:
