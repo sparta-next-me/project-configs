@@ -48,3 +48,8 @@ spring:
               uri: lb://reservation-service
               predicates:
                 - Path=/v1/reservations/**
+
+            - id: chat-service
+              uri: lb://chat-service
+              predicates:
+                - Path=/v1/chats/**
