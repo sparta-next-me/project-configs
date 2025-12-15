@@ -38,4 +38,13 @@ spring:
               uri: lb://usergoal-service
               predicates:
                 - Path=/v1/usergoal/**
-  
+
+            - id: payment-service
+              uri: lb://payment-service
+              predicates:
+                - Path=/v1/payments/**
+
+            - id: reservation-service
+              uri: lb://reservation-service
+              predicates:
+                - Path=/v1/reservations/**
