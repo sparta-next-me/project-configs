@@ -53,11 +53,6 @@ spring:
               uri: lb://chat-service
               predicates:
                 - Path=/v1/chats/**
-
-            - id: chat-http
-              uri: http://sparta-nextme.xyz:18080
-              predicates:
-                - Path=/ws/chat/**
                 
             - id: chat-websocket
               uri: ws://sparta-nextme.xyz:18080  # ws:// 프로토콜 사용
