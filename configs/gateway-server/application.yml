@@ -62,7 +62,11 @@ spring:
             - id: chat-service
               uri: lb://chat-service
               predicates:
-                - Path=/v1/chats/**,/chat-service/ws/chat/**        
+                - Path=/v1/chats/**,/chat-service/ws/chat/**,/ws/chat/info
+              filters:
+                - RemoveResponseHeader=Access-Control-Allow-Origin
+                - AddResponseHeader=Access-Control-Allow-Origin, http://localhost:63342
+                - AddResponseHeader=Access-Control-Allow-Credentials, true
                 
             - id: chat-websocket
               #uri: ws://sparta-nextme.xyz:18080  # ws:// 프로토콜 사용
