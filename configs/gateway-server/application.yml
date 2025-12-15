@@ -28,4 +28,14 @@ spring:
               uri: lb://notification-service
               predicates:
                 - Path=/v1/notifications/**
+                
+            - id: account-service
+              uri: lb://account-service
+              predicates:
+                - Path=/v1/account/**
+
+            - id: usergoal-service
+              uri: lb://usergoal-service
+              predicates:
+                - Path=/v1/usergoal/**
   
