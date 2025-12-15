@@ -58,3 +58,10 @@ spring:
               uri: lb:ws://chat-service  # ws:// 프로토콜 사용
               predicates:
                 - Path=/ws/chat/**
+
+# 디버깅용 로그 (문제 해결 후 제거 가능)
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web.socket: DEBUG
+    reactor.netty: DEBUG
