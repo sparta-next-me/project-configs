@@ -55,7 +55,7 @@ spring:
                 - Path=/v1/chats/**
                 
             - id: chat-websocket
-              uri: lb:ws://chat-service  # ws:// 프로토콜 사용
+              uri: ws://http://sparta-nextme.xyz:18080  # ws:// 프로토콜 사용
               predicates:
                 - Path=/ws/chat/**
                 
