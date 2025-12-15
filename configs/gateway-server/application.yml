@@ -59,20 +59,24 @@ spring:
               predicates:
                 - Path=/v1/reservations/**
                 
-            - id: chat-service
+            - id: chat-info
               uri: lb://chat-service
               predicates:
-                - Path=/v1/chats/**,/chat-service/ws/chat/**,/ws/chat/info
+                - Path=/ws/chat/info
               filters:
                 - RemoveResponseHeader=Access-Control-Allow-Origin
                 - AddResponseHeader=Access-Control-Allow-Origin, http://localhost:63342
                 - AddResponseHeader=Access-Control-Allow-Credentials, true
-                
-            - id: chat-websocket
-              #uri: ws://sparta-nextme.xyz:18080  # ws:// 프로토콜 사용
-              uri: lb:ws://chat-service  # ws:// 프로토콜 사용
+          
+            - id: chat-service
+              uri: lb://chat-service
               predicates:
-                - Path=/ws/chat/** #SockJS 요청 고려
+                - Path=/v1/chats/**
+          
+            - id: chat-websocket
+              uri: lb:ws://chat-service
+              predicates:
+                - Path=/ws/chat/{segment}/**  # /info 제외
               filters:
                 - RemoveResponseHeader=Access-Control-Allow-Origin
                 - AddResponseHeader=Access-Control-Allow-Origin, http://localhost:63342
