@@ -46,11 +46,6 @@ spring:
           uri: lb://reservation-service
           predicates:
             - Path=/v1/reservations/**
-            
-        - id: chat-sockjs
-          uri: lb://chat-service
-          predicates:
-            - Path=/ws/chat/info/**
       
         - id: chat-service
           uri: lb://chat-service
@@ -60,7 +55,7 @@ spring:
         - id: chat-websocket
           uri: lb:ws://chat-service
           predicates:
-            - Path=/ws/chat/*/*/websocket
+            - Path=/ws/chat/
 
 # 디버깅용 로그
 logging:
