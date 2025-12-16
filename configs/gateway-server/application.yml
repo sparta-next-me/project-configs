@@ -51,16 +51,11 @@ spring:
           uri: lb://chat-service
           predicates:
             - Path=/v1/chats/**
-            - Path=/ws/chat/**
-          filters:
-            - PreserveHostHeader
       
         - id: chat-websocket
           uri: lb:ws://chat-service
           predicates:
-            - Path=/ws/chat/*/*/websocket
-          filters:
-            - PreserveHostHeader
+            - Path=/ws/chat/**
 
 # 디버깅용 로그
 logging:
