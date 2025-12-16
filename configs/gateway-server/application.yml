@@ -74,7 +74,7 @@ spring:
         - id: chat-websocket
           uri: lb:ws://chat-service
           predicates:
-            - Path=/ws/chat/**/websocket
+            - Path=/ws/chat/**
 
 # 디버깅용 로그
 logging:
