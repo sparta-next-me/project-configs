@@ -1,81 +1,82 @@
 spring:
   cloud:
     gateway:
-      # CORS 글로벌 설정 추가
+      # CORS 글로벌 설정
       default-filters:
-        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST # cors 중복 헤더 제거
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+      
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOriginPatterns: "*" # 모든 도메인 허용
+            allowedOriginPatterns: "*"
             allowedMethods: "*"
             allowedHeaders: "*"
             allowCredentials: true
-      server:
-        webflux:
-          discovery:
-            locator:
-              enabled: true
-              lower-case-service-id: true
-              
-          routes:
-            - id: user-service
-              uri: lb://user-service
-              predicates:
-                - Path=/v1/user/**
-                
-            - id: promotion-service
-              uri: lb://promotion-service
-              predicates:
-                - Path=/v1/promotions/**
-                
-            - id: point-service
-              uri: lb://point-service
-              predicates:
-                - Path=/v1/points/**
-                
-            - id: notification-service
-              uri: lb://notification-service
-              predicates:
-                - Path=/v1/notifications/**
-                
-            - id: account-service
-              uri: lb://account-service
-              predicates:
-                - Path=/v1/account/**
-                
-            - id: usergoal-service
-              uri: lb://usergoal-service
-              predicates:
-                - Path=/v1/usergoal/**
-                
-            - id: payment-service
-              uri: lb://payment-service
-              predicates:
-                - Path=/v1/payments/**
-                
-            - id: reservation-service
-              uri: lb://reservation-service
-              predicates:
-                - Path=/v1/reservations/**
-                
-            - id: chat-sockjs
-              uri: lb://chat-service
-              predicates:
-                - Path=/ws/chat/info/**
-          
-            - id: chat-service
-              uri: lb://chat-service
-              predicates:
-                - Path=/v1/chats/**
-          
-            - id: chat-websocket
-              uri: lb:ws://chat-service
-              predicates:
-                - Path=/ws/chat/**/websocket
+      
+      # discovery 설정 (선택사항)
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      
+      # routes는 gateway 바로 아래에
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/v1/user/**
+            
+        - id: promotion-service
+          uri: lb://promotion-service
+          predicates:
+            - Path=/v1/promotions/**
+            
+        - id: point-service
+          uri: lb://point-service
+          predicates:
+            - Path=/v1/points/**
+            
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/v1/notifications/**
+            
+        - id: account-service
+          uri: lb://account-service
+          predicates:
+            - Path=/v1/account/**
+            
+        - id: usergoal-service
+          uri: lb://usergoal-service
+          predicates:
+            - Path=/v1/usergoal/**
+            
+        - id: payment-service
+          uri: lb://payment-service
+          predicates:
+            - Path=/v1/payments/**
+            
+        - id: reservation-service
+          uri: lb://reservation-service
+          predicates:
+            - Path=/v1/reservations/**
+            
+        - id: chat-sockjs
+          uri: lb://chat-service
+          predicates:
+            - Path=/ws/chat/info/**
+      
+        - id: chat-service
+          uri: lb://chat-service
+          predicates:
+            - Path=/v1/chats/**
+      
+        - id: chat-websocket
+          uri: lb:ws://chat-service
+          predicates:
+            - Path=/ws/chat/**/websocket
 
-                
-# 디버깅용 로그 (문제 해결 후 제거 가능)
+# 디버깅용 로그
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
