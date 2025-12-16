@@ -13,12 +13,6 @@ spring:
             # 중복 제거 옵션들
             exposedHeaders: "*"
             maxAge: 3600
-      # CORS 응답 헤더 중복 제거 필터
-      default-filters:
-        - name: DedupeResponseHeader
-          args:
-            name: Access-Control-Allow-Origin Access-Control-Allow-Credentials
-            strategy: RETAIN_FIRST
 
       discovery:
         locator:
@@ -70,11 +64,15 @@ spring:
           uri: lb://chat-service
           predicates:
             - Path=/v1/chats/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
       
         - id: chat-websocket
           uri: lb:ws://chat-service
           predicates:
             - Path=/ws/chat/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
 
 # 디버깅용 로그
 logging:
