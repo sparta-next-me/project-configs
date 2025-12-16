@@ -56,6 +56,8 @@ spring:
           uri: lb:ws://chat-service
           predicates:
             - Path=/ws/chat/**
+          filters:
+            - PreserveHostHeader
 
 # 디버깅용 로그
 logging:
