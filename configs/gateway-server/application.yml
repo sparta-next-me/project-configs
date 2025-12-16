@@ -1,13 +1,22 @@
 spring:
   cloud:
     gateway:
+      # 전역 CORS 설정
       globalcors:
-          corsConfigurations:
-            '[/**]':
-              allowedOrigins: "*"
-              allowedMethods: "*"
-              allowedHeaders: "*"
-              allowCredentials: true
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
+            # 중복 제거 옵션들
+            exposedHeaders: "*"
+            maxAge: 3600
+      # CORS 응답 헤더 중복 제거 필터
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_UNIQUE
+
       discovery:
         locator:
           enabled: true
