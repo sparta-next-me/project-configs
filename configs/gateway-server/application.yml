@@ -29,6 +29,11 @@ spring:
           uri: lb://promotion-service
           predicates:
             - Path=/v1/promotions/**
+
+        - id: monitoring-server
+          uri: lb://monitoring-server
+          predicates:
+            - Path=/v1/monitoring/**
             
         - id: point-service
           uri: lb://point-service
