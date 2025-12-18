@@ -59,6 +59,11 @@ spring:
           uri: lb://reservation-service
           predicates:
             - Path=/v1/reservations/**
+
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/v1/products/**
       
         - id: chat-service
           uri: lb://chat-service
