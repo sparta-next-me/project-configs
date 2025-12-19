@@ -51,7 +51,7 @@ management:
      endpoint: "http://34.22.87.75:9500/api/v2/spans" # Zipkin 수집 서버의 엔드포인트 URL을 입력합니다.
  tracing:
    sampling:
-     probability: 1.0
+     probability: 0.1
 
 logging:
  level:
